@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { environment } from './../../environments/environment';
-import { HttpClient } from '@angular/common/http';;
+import { HttpClient, HttpHeaders } from '@angular/common/http';;
 import { Observable } from 'rxjs';
 import { Symptom } from '../model/symptom';
 
@@ -10,9 +10,10 @@ import { Symptom } from '../model/symptom';
 export class DiagnosisService {
 
   rootUrl = environment.apiUrl;
+  serverUrl = environment.serverUrl;
   tooken = environment.token;
 
-
+  
   constructor(private http: HttpClient) { }
 
   getSymptoms(): Observable<Symptom[]> {
@@ -21,30 +22,15 @@ export class DiagnosisService {
   }
 
   getDiagnosis(): Observable<any> {
-    let symptoms = 'https://sandbox-healthservice.priaid.ch/symptoms';
     let url = `${this.rootUrl}/diagnosis?token=${this.tooken}&language=de-ch&symptoms=[235]&gender=male&year_of_birth=1988`;
     return this.http.get<any>(url);
   }
 
+  post(request: any) {
+    let url = `${this.serverUrl}/diagnosis`;
+    return this.http.post(url, request, { responseType: 'text' });
+  }
 
 
-  // public post(cmd: string, data: object): Observable<any> {
-
-  //   const params = new URLSearchParams();
-  //   params.set('cmd', cmd);
-
-  //   const options = new RequestOptions({
-  //     headers: this.getAuthorizedHeaders(),
-  //     responseType: ResponseContentType.Json,
-  //     params: params,
-  //     withCredentials: false
-  //   });
-
-  //   console.log('Options: ' + JSON.stringify(options));
-
-  //   return this.http.post(this.BASE_URL, data, options)
-  //     .map(this.handleData)
-  //     .catch(this.handleError);
-  // }
 }
 

@@ -53,6 +53,9 @@ export class SymptomsComponent implements OnInit {
 
 
   onSubmit() {
+    if (this.symptomForm.invalid) {
+      return;
+    }
     const symptomSelected = this.selectedOption;
     const formDetais = this.symptomForm.value;
     let theObj = { symptomSelected, ...formDetais}

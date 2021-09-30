@@ -1,22 +1,17 @@
-
 <div class="container-fluid" style="padding-bottom: 80px;">
   <div class="row">
     <div class="col-md-8 offset-md-2">
-      <div class="account-content">
         <div class="row align-items-center justify-content-center">
-          <div class="col-md-7 col-lg-6 login-left">
-            <img src="assets/images/banner.png" class="img-fluid" alt="Doccure Login">
+          <div class="col-md-7 col-lg-6">
+            <img src="assets/images/banner.png" class="img-fluid" alt="image">
           </div>
-          <div class="col-md-12 col-lg-6 login-right">
-            <div class="login-header">
+          <div class="col-md-12 col-lg-6">
               <h4>Symptom Checker</h4>
-            </div>
             <form [formGroup]="symptomForm" (ngSubmit)="onSubmit()">
               <div class="form-group card-label">
                 <label class="">Year of birth</label>
                 <input class="form-control floating" [formControl]="symptomForm.get('yearOfBirth')">
               </div>
-
   
               <div class="form-group card-label">
                 <label>Gender</label>
@@ -31,25 +26,10 @@
                   <input class="form-control floating"  [typeahead]="symptoms" typeaheadOptionField="Name" [typeaheadScrollable]="true"
                     (typeaheadOnSelect)="onSelect($event)" class="form-control" formControlName="symptom">
               </div>
-              <button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Submit</button>
+              <button class="btn btn-primary btn-block btn-lg" [disabled]="symptomForm.invalid" type="submit">Submit</button>
             </form>
           </div>
         </div>
-      </div>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-<!-- <div class="search-box">
-<label for="">Search for symptoms</label>
-<input [(ngModel)]="selectedValue" [typeahead]="symptoms" typeaheadOptionField="Name" [typeaheadScrollable]="true"
-(typeaheadOnSelect)="onSelect($event)" class="form-control">
-</div> -->
