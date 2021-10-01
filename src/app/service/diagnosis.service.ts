@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { environment } from './../../environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';;
+import { HttpClient } from '@angular/common/http';;
 import { Observable } from 'rxjs';
 import { Symptom } from '../model/symptom';
 
@@ -21,16 +21,14 @@ export class DiagnosisService {
     return this.http.get<Symptom[]>(url);
   }
 
-  getDiagnosis(): Observable<any> {
-    let url = `${this.rootUrl}/diagnosis?token=${this.tooken}&language=de-ch&symptoms=[235]&gender=male&year_of_birth=1988`;
+  getDiagnosis(symptomId: string, gender: string, birth: string): Observable<any> {
+    let url = `${this.rootUrl}/diagnosis?token=${this.tooken}&language=de-ch&symptoms=[${symptomId}]&gender=${gender}&year_of_birth=${birth}`;
     return this.http.get<any>(url);
   }
 
-  post(request: any) {
+  post(request: any): Observable<any> {
     let url = `${this.serverUrl}/diagnosis`;
     return this.http.post(url, request, { responseType: 'text' });
   }
-
-
 }
 

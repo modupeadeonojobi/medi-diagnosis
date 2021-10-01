@@ -1,3 +1,4 @@
+import { Symptom } from './../model/symptom';
 import { Component, OnInit } from '@angular/core';
 import { DiagnosisService } from './../service/diagnosis.service';
 import { finalize } from 'rxjs/operators';
@@ -18,17 +19,20 @@ export class DiagnosisComponent implements OnInit {
 
   constructor(private service: DiagnosisService) {
     this.localData = history.state;
-    this.getTheDiagnosis();
+    const symptomId = this.localData['ID'];
+    const gender = this.localData['gender'];
+    const birthYear = this.localData['yearOfBirth']   
+    this.getTheDiagnosis(symptomId, gender, birthYear);
    }
 
   ngOnInit(): void {}
 
 
-  getTheDiagnosis(): void {
-    this.service.getDiagnosis().subscribe((response: any) => {
-      this.dataSource = response;
+  getTheDiagnosis(id: string, gender: string, birth: string): void {
+    this.service.getDiagnosis(id, gender, birth ).subscribe((response: any) => {
+      this.dataSource = response;      
     }, error => {
-      console.error(error);
+      console.error(error); 
     })
   }
 
@@ -45,16 +49,17 @@ export class DiagnosisComponent implements OnInit {
   updateServer(inputObject: any): void {
     const data = inputObject?.value?.Issue;
     const validityResponse = this.validity;
+    const allData = {...data, validityResponse}
     this.selectedData = {
-      accuracy: data.Accuracy,
-      id: data.ID,
-      icd: data.Icd,
-      icdName: data.IcdName,
-      name: data.Name,
-      profName: data.ProfName,
-      ranking: data.Ranking,
-      validityResponse: validityResponse
-    } 
+      accuracy: allData.Accuracy,
+      id: allData.ID,
+      icd: allData.Icd,
+      icdName: allData.IcdName,
+      name: allData.Name,
+      profName: allData.ProfName,
+      ranking: allData.Ranking,
+      validityResponse: allData.validityResponse
+    }     
   }
 
 

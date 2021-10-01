@@ -8,32 +8,35 @@
           <div class="col-md-12 col-lg-6"  >
           <div class="card m-4 shadow-sm" *ngFor="let item of dataSource | keyvalue">
             <div class="card-body" (click)="updateServer(item)">
-               <p class="card-subtitle font-weight-bold mb-2 ">Classification of Diseases</p>
-               <p class="card-text text-muted">{{item.value.Issue.IcdName}}</p>
               <p class="card-subtitle font-weight-bold mb-2">Common Name</p>
-              <p class="card-text text-muted">{{item.value.Issue.Name}}</p>
+              <p class="card-text text-muted">{{item?.value?.Issue?.Name}}</p>
               <p class="card-subtitle font-weight-bold mb-2 ">Professional Name</p>
-              <p class="card-text text-muted">{{item.value.Issue.ProfName}}</p>
-              <p class="card-subtitle font-weight-bold mb-2 ">Accuracy</p>
+              <p class="card-text text-muted">{{item?.value?.Issue?.ProfName}}</p>
+              <p class="card-subtitle font-weight-bold mb-2 ">Implantable Cardioverter Defibrillator</p>
+              <p class="card-text text-muted">{{item?.value?.Issue?.Icd}}</p>
+              <p class="card-subtitle font-weight-bold mb-2 ">Implantable Cardioverter Defibrillator Name</p>
+              <p class="card-text text-muted">{{item?.value?.Issue?.IcdName}}</p>
+              <p class="card-subtitle font-weight-bold mb-2 ">Specialisation</p>
+              <span class="card-text text-muted" *ngFor="let specialisation of item?.value?.Specialisation">
+                {{specialisation?.Name}} ,
+              </span>
+              <p class="card-subtitle font-weight-bold mb-2 mt-2">Accuracy</p>
               <div class="mb-2">
-                <progressbar [max]="100" [value]="item.value.Issue.Accuracy" [striped]="true"
+                <progressbar [max]="100" [value]="item?.value?.Issue?.Accuracy" [striped]="true"
                   [animate]="true"><i>{{item.value.Issue.Accuracy}}%</i>
                 </progressbar>
               </div>
-              <div >
-                  <div class="d-flex justify-content-between mt-3">
-                  <button class="btn btn-primary" type="submit"  (click)="validButton()">Valid
-                    <span class="spinner-border spinner-border-sm" role="status" *ngIf="loading">
-                      <span class="sr-only">Loading...</span>
-                    </span>
+                <div class="d-flex justify-content-between mt-3">
+                  <button class="btn btn-primary" type="submit"   
+                    (click)="validButton()">Valid
                   </button>
-                  <button class="btn btn-danger" type="submit"  (click)="invalidButton()">Invalid
-                    <span class="spinner-border spinner-border-sm" role="status" *ngIf="loading">
-                      <span class="sr-only">Loading...</span>
-                    </span>
+                  <span class="spinner-border " role="status" *ngIf="loading">
+                    <span class="sr-only">Loading...</span>
+                  </span>
+                  <button class="btn btn-danger" type="submit"
+                    (click)="invalidButton()">Invalid
                   </button>
                 </div>
-              </div>
             </div>  
           </div>
         </div>

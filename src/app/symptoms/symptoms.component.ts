@@ -12,6 +12,10 @@ import { Router } from '@angular/router';
 })
 export class SymptomsComponent implements OnInit {
 
+  selectedValue: string = '';
+  selectedOption: string = ''
+  symptoms: Symptom[] = [];
+
   symptomForm = new FormGroup({
     yearOfBirth: new FormControl('', [
       Validators.required,
@@ -24,20 +28,12 @@ export class SymptomsComponent implements OnInit {
     ])
   });
 
-  selectedValue: string = '';
-  selectedOption: string = ''
-  symptoms: Symptom[] = [];
-
+ 
   constructor(private service: DiagnosisService, private route: Router) {
     this.getAllSymptoms();
   }
 
   ngOnInit() { }
-
-  symptomsFormErrors() {
-    const { dirty, touched, errors } = this.symptomForm;
-    return dirty && touched && errors;
-  }
 
   onSelect(event: TypeaheadMatch): void {
     this.selectedOption = event.item;
@@ -51,15 +47,13 @@ export class SymptomsComponent implements OnInit {
     });
   }
 
-
   onSubmit() {
     if (this.symptomForm.invalid) {
       return;
     }
-    const symptomSelected = this.selectedOption;
-    const formDetais = this.symptomForm.value;
-    let theObj = { symptomSelected, ...formDetais}
-    console.log(theObj);
+    const symptomSelected: {} = this.selectedOption;
+    const formDetails = this.symptomForm.value;
+    const theObj = { ...symptomSelected, ...formDetails}
     this.route.navigateByUrl('/diagnosis', {state: theObj});
   }
 }

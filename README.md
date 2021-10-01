@@ -1,6 +1,6 @@
 # medi-diagnosis
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.6.
+This is a symptom checker application
 
 ## Getting Started.
 
@@ -19,9 +19,9 @@ if you have it then install the project's dependencies:
 npm install
 ```
 
-The tooken has expired go to [apiMedic](https://sandbox-authservice.priaid.ch/docs.html) to generate a new token.
+The tooken has expired. Go to [apiMedic](https://sandbox-authservice.priaid.ch/docs.html) to generate a new token.
 Credential Username: modupeadeonojobi@gmail.com Password: r5XPx96DaLc4y3J2E
-and replace the token in environments.
+and replace the token in environment component.
 
 ## Development server
 
