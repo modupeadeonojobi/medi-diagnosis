@@ -1,3 +1,9 @@
 .right-btn {
   margin-right: 16rem
 }
+
+.spin {
+  display: table;
+  margin: 0 auto;
+  margin-top: 2rem;
+}

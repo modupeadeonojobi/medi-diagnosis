@@ -1,8 +1,6 @@
-import { Symptom } from './../model/symptom';
 import { Component, OnInit } from '@angular/core';
 import { DiagnosisService } from './../service/diagnosis.service';
 import { finalize } from 'rxjs/operators';
-
 
 @Component({
   selector: 'app-diagnosis',
@@ -12,10 +10,11 @@ import { finalize } from 'rxjs/operators';
 export class DiagnosisComponent implements OnInit {
 
   localData: {} = {};
-  dataSource: {} = {};
+  dataSource: any[] = [];
   validity: boolean = false;
   selectedData: {} = {};
   loading: boolean = false;
+  show: boolean = false;
 
   constructor(private service: DiagnosisService) {
     this.localData = history.state;
@@ -29,7 +28,9 @@ export class DiagnosisComponent implements OnInit {
 
 
   getTheDiagnosis(id: string, gender: string, birth: string): void {
-    this.service.getDiagnosis(id, gender, birth ).subscribe((response: any) => {
+    this.show = true;
+    this.service.getDiagnosis(id, gender, birth )
+    .pipe(finalize(() => this.show = false)).subscribe((response: any) => {
       this.dataSource = response;      
     }, error => {
       console.error(error); 
@@ -62,18 +63,17 @@ export class DiagnosisComponent implements OnInit {
     }     
   }
 
-
   saveData(request: any): void {
-    this.loading = true
+    this.loading = true;
     this.service.post(request)
     .pipe(finalize(() => {this.loading = false}))
     .subscribe(() => {
     }, error => {
-      console.error(error)
+      console.error(error);
     })
-
-
   }
+
+
 }
 
 

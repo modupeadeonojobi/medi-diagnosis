@@ -1,62 +1,42 @@
-<div class="container-fluid" style="padding-bottom: 80px;">
-  <div class="row">
-    <div class="col-md-8 offset-md-2">
-      <div class="row align-items-center justify-content-center">
-        <div class="col-md-7 col-lg-6">
-          <img src="assets/images/banner.png" class="img-fluid" alt="image">
-        </div>
-          <div class="col-md-12 col-lg-6"  >
-          <div class="card m-4 shadow-sm" *ngFor="let item of dataSource | keyvalue">
-            <div class="card-body" (click)="updateServer(item)">
-              <p class="card-subtitle font-weight-bold mb-2">Common Name</p>
-              <p class="card-text text-muted">{{item?.value?.Issue?.Name}}</p>
-              <p class="card-subtitle font-weight-bold mb-2 ">Professional Name</p>
-              <p class="card-text text-muted">{{item?.value?.Issue?.ProfName}}</p>
-              <p class="card-subtitle font-weight-bold mb-2 ">Implantable Cardioverter Defibrillator</p>
-              <p class="card-text text-muted">{{item?.value?.Issue?.Icd}}</p>
-              <p class="card-subtitle font-weight-bold mb-2 ">Implantable Cardioverter Defibrillator Name</p>
-              <p class="card-text text-muted">{{item?.value?.Issue?.IcdName}}</p>
-              <p class="card-subtitle font-weight-bold mb-2 ">Specialisation</p>
-              <span class="card-text text-muted" *ngFor="let specialisation of item?.value?.Specialisation">
-                {{specialisation?.Name}} ,
-              </span>
-              <p class="card-subtitle font-weight-bold mb-2 mt-2">Accuracy</p>
-              <div class="mb-2">
-                <progressbar [max]="100" [value]="item?.value?.Issue?.Accuracy" [striped]="true"
-                  [animate]="true"><i>{{item.value.Issue.Accuracy}}%</i>
-                </progressbar>
-              </div>
-                <div class="d-flex justify-content-between mt-3">
-                  <button class="btn btn-primary" type="submit"   
-                    (click)="validButton()">Valid
-                  </button>
-                  <span class="spinner-border " role="status" *ngIf="loading">
-                    <span class="sr-only">Loading...</span>
-                  </span>
-                  <button class="btn btn-danger" type="submit"
-                    (click)="invalidButton()">Invalid
-                  </button>
-                </div>
-            </div>  
+<span class="spinner-border spin" role="status" *ngIf="show">
+  <span class="sr-only">Loading...</span>
+</span>
+
+<div class="container" style="padding-bottom: 80px;" *ngIf="!show">
+  <div class="text-center mt-5 pt-2" *ngIf="dataSource.length == 0">
+    <h6 class="font-weight-bold">No record found for selected symptoms.</h6>
+  </div>
+    <div class="d-flex justify-content-center align-items-center flex-wrap">
+      <div class="card m-4 shadow-sm" style="width: 30rem;" *ngFor="let item of dataSource | keyvalue">
+        <div class="card-body pl-3 pl-3" (click)="updateServer(item)">
+          <p class="card-subtitle font-weight-bold mb-2">Common Name</p>
+          <p class="card-text text-muted">{{item?.value?.Issue?.Name}}</p>
+          <p class="card-subtitle font-weight-bold mb-2 ">Professional Name</p>
+          <p class="card-text text-muted">{{item?.value?.Issue?.ProfName}}</p>
+          <p class="card-subtitle font-weight-bold mb-2 ">Implantable Cardioverter Defibrillator</p>
+          <p class="card-text text-muted">{{item?.value?.Issue?.Icd}}</p>
+          <p class="card-subtitle font-weight-bold mb-2 ">Implantable Cardioverter Defibrillator Name</p>
+          <p class="card-text text-muted">{{item?.value?.Issue?.IcdName}}</p>
+          <p class="card-subtitle font-weight-bold mb-2 ">Specialisation</p>
+          <span class="card-text text-muted" *ngFor="let specialisation of item?.value?.Specialisation">
+            {{specialisation?.Name}} ,
+          </span>
+          <p class="card-subtitle font-weight-bold mb-2 mt-2">Accuracy</p>
+          <div class="mb-2">
+            <progressbar [max]="100" [value]="item?.value?.Issue?.Accuracy" [striped]="true" [animate]="true">
+              <i>{{item.value.Issue.Accuracy}}%</i>
+            </progressbar>
           </div>
-        </div>
-      </div>
+          <div class="d-flex justify-content-between mt-3">
+            <button class="btn btn-primary" type="submit" (click)="validButton()">Valid
+            </button>
+            <span class="spinner-border " role="status" *ngIf="loading">
+              <span class="sr-only">Loading...</span>
+            </span>
+            <button class="btn btn-danger" type="submit" (click)="invalidButton()">Invalid
+            </button>
+          </div>
+      </div>          
     </div>
   </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-<!-- <div class="search-box">
-<label for="">Search for symptoms</label>
-<input [(ngModel)]="selectedValue" [typeahead]="symptoms" typeaheadOptionField="Name" [typeaheadScrollable]="true"
-(typeaheadOnSelect)="onSelect($event)" class="form-control">
-</div> -->
+</div> 

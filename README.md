@@ -1,6 +1,16 @@
 # medi-diagnosis
 
-This is a symptom checker application
+This is a symptom checker application.
+
+<img src="./src/assets/images/symptoms-page.png" 
+raw="true"
+alt="Symptoms page"
+/>
+
+<img src="./src/assets/images/diagnosis-page.png" 
+raw="true"
+alt="Symptoms page"
+/>
 
 ## Getting Started.
 
@@ -20,8 +30,14 @@ npm install
 ```
 
 The tooken has expired. Go to [apiMedic](https://sandbox-authservice.priaid.ch/docs.html) to generate a new token.
-Credential Username: modupeadeonojobi@gmail.com Password: r5XPx96DaLc4y3J2E
-and replace the token in environment component.
+See credential details below 
+
+```bash
+Username: modupeadeonojobi@gmail.com 
+Password: r5XPx96DaLc4y3J2E
+```
+
+Replace the token in environment component.
 
 ## Development server
 
